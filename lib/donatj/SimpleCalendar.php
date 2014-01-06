@@ -12,16 +12,15 @@ namespace donatj;
  */
 class SimpleCalendar {
 
-	private $now = false;
-	private $daily_html = array();
-	private $offset = 0;
-
 	/**
 	 * Array of Week Day Names
 	 *
 	 * @var array
 	 */
-	public $wday_names = false;
+	private $wday_names = false;
+	private $now = false;
+	private $daily_html = array();
+	private $offset = 0;
 
 	/**
 	 * Constructor - Calls the setDate function
@@ -44,6 +43,18 @@ class SimpleCalendar {
 			$this->now = getdate(strtotime($date_string));
 		} else {
 			$this->now = getdate();
+		}
+	}
+
+	/**
+	 * Sets the date day names for the calendar
+	 *
+	 * @param bool|array $day_names String array of the name of the days. If null or false, the english version is used.
+	 */
+	public function setDayNames( $day_names ) {
+		$this->wday_names = false;
+		if( !empty($day_names) && $day_names ) {
+			$this->wday_names = $day_names;
 		}
 	}
 
@@ -82,26 +93,15 @@ class SimpleCalendar {
 	 */
 	public function clearDailyHtml() { $this->daily_html = array(); }
 
-	private function array_rotate(&$data, $steps) {
-		$count = count($data);
-		if($steps < 0) {
-			$steps = $count + $steps;
-		}
-		$steps = $steps % $count;
-		for( $i = 0; $i < $steps; $i++ ) {
-			array_push($data, array_shift($data));
-		}
-	}
-
 	/**
 	 * Sets the first day of Week
-	 * 
+	 *
 	 * @param int|string $offet Day to start on, ex: "Monday" or 0-6 where 0 is Sunday
 	 */
-	public function setStartOfWeek($offet) {
-		if(is_int($offet)) {
+	public function setStartOfWeek( $offet ) {
+		if( is_int($offet) ) {
 			$this->offset = $offet % 7;
-		}else{
+		} else {
 			$this->offset = date('N', strtotime($offet)) % 7;
 		}
 	}
@@ -127,7 +127,7 @@ class SimpleCalendar {
 		$no_days = cal_days_in_month(CAL_GREGORIAN, $this->now['mon'], $this->now['year']);
 
 		$out = '<table cellpadding="0" cellspacing="0" class="SimpleCalendar"><thead><tr>';
-		
+
 		for( $i = 0; $i < 7; $i++ ) {
 			$out .= '<th>' . $wdays[$i] . '</th>';
 		}
@@ -142,14 +142,14 @@ class SimpleCalendar {
 
 		$count = $wday + 1;
 		for( $i = 1; $i <= $no_days; $i++ ) {
-			$out .= '<td'. ($i == $this->now['mday'] && $this->now['mon'] == date('n') && $this->now['year'] == date('Y') ? ' class="today"' : '').'>';
-			
-			$datetime = mktime ( 0, 0, 1, $this->now['mon'], $i, $this->now['year'] );
+			$out .= '<td' . ($i == $this->now['mday'] && $this->now['mon'] == date('n') && $this->now['year'] == date('Y') ? ' class="today"' : '') . '>';
 
-			$out .= '<time datetime="' . date('Y-m-d', $datetime) . '">'.$i.'</time>';
-			
+			$datetime = mktime(0, 0, 1, $this->now['mon'], $i, $this->now['year']);
+
+			$out .= '<time datetime="' . date('Y-m-d', $datetime) . '">' . $i . '</time>';
+
 			$dHtml_arr = false;
-			if(isset( $this->daily_html[$this->now['year']][$this->now['mon']][$i] )) {
+			if( isset($this->daily_html[$this->now['year']][$this->now['mon']][$i]) ) {
 				$dHtml_arr = $this->daily_html[$this->now['year']][$this->now['mon']][$i];
 			}
 
@@ -173,6 +173,17 @@ class SimpleCalendar {
 		}
 
 		return $out;
+	}
+
+	private function array_rotate( &$data, $steps ) {
+		$count = count($data);
+		if( $steps < 0 ) {
+			$steps = $count + $steps;
+		}
+		$steps = $steps % $count;
+		for( $i = 0; $i < $steps; $i++ ) {
+			array_push($data, array_shift($data));
+		}
 	}
 
 }
