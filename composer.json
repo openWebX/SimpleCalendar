@@ -6,7 +6,7 @@
 	"homepage"   : "http://donatstudios.com/SimpleCalendar",
 	"license"    : "MIT",
 	"require"    : {
-		"php"         : ">=5.3.0",
+		"php"         : ">=7.0.0",
 		"ext-calendar": "*"
 	},
 	"require-dev": {
@@ -27,8 +27,8 @@
 		}
 	],
 	"autoload"   : {
-		"psr-0": {
-			"openWebX": "lib/"
+		"psr-4": {
+			"openWebX\\SimpleCalendar\\": "lib/"
 		}
 	}
 }
