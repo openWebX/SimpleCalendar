@@ -127,13 +127,23 @@ namespace SimpleCalendar {
             $no_days = cal_days_in_month(CAL_GREGORIAN, $this->now['mon'], $this->now['year']);
             $out = "\n<style>\n" . file_get_contents(__DIR__ . '/css/SimpleCalendar.css') . "\n</style>\n";
 
-            $out .= '<table cellpadding="0" cellspacing="0" class="SimpleCalendar"><thead><tr>';
+            $out .= '
+            <table cellpadding="0" cellspacing="0" class="SimpleCalendar">
+                <thead>
+                    <tr>
+            ';
 
             for ($i = 0; $i < 7; $i++) {
-                $out .= '<th>' . $wdays[$i] . '</th>';
+                $out .= '
+                        <th>' . $wdays[$i] . '</th>
+                ';
             }
 
-            $out .= "</tr></thead>\n<tbody>\n<tr>";
+            $out .= "
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>";
 
             $wday = ($wday + 7) % 7;
 
