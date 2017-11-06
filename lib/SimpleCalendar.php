@@ -1,6 +1,6 @@
 <?php
 
-namespace donatj;
+namespace openWebX;
 
 /**
  * Simple Calendar
@@ -56,12 +56,10 @@ class SimpleCalendar {
 	public function addDailyHtml( $html, $start_date_string, $end_date_string = null ) {
 		static $htmlCount = 0;
 		$start_date = strtotime($start_date_string);
+        $end_date = $start_date;
 		if( $end_date_string ) {
 			$end_date = strtotime($end_date_string);
-		} else {
-			$end_date = $start_date;
 		}
-
 		$working_date = $start_date;
 		do {
 			$tDate        = getdate($working_date);
@@ -101,7 +99,7 @@ class SimpleCalendar {
 		if( $this->wday_names ) {
 			$wdays = $this->wday_names;
 		} else {
-			$today = (86400 * (date("N")));
+			$today = (86400 * date('N'));
 			$wdays = array();
 			for( $i = 0; $i < 7; $i++ ) {
 				$wdays[] = strftime('%a', time() - $today + ($i * 86400));
@@ -122,7 +120,7 @@ class SimpleCalendar {
 
 		$wday = ($wday + 7) % 7;
 
-		if( $wday == 7 ) {
+		if( $wday === 7 ) {
 			$wday = 0;
 		} else {
 			$out .= str_repeat('<td class="SCprefix">&nbsp;</td>', $wday);
@@ -130,7 +128,7 @@ class SimpleCalendar {
 
 		$count = $wday + 1;
 		for( $i = 1; $i <= $no_days; $i++ ) {
-			$out .= '<td' . ($i == $this->now['mday'] && $this->now['mon'] == date('n') && $this->now['year'] == date('Y') ? ' class="today"' : '') . '>';
+			$out .= '<td' . ($i === $this->now['mday'] && $this->now['mon'] === date('n') && $this->now['year'] === date('Y') ? ' class="today"' : '') . '>';
 
 			$datetime = mktime(0, 0, 1, $this->now['mon'], $i, $this->now['year']);
 
@@ -147,7 +145,7 @@ class SimpleCalendar {
 				}
 			}
 
-			$out .= "</td>";
+			$out .= '</td>';
 
 			if( $count > 6 ) {
 				$out .= "</tr>\n" . ($i < $no_days ? '<tr>' : '');
@@ -155,7 +153,7 @@ class SimpleCalendar {
 			}
 			$count++;
 		}
-		$out .= ( $count != 1 ) ? str_repeat('<td class="SCsuffix">&nbsp;</td>', 8 - $count) . '</tr>' : '';
+		$out .= ( $count !== 1 ) ? str_repeat('<td class="SCsuffix">&nbsp;</td>', 8 - $count) . '</tr>' : '';
 		$out .= "\n</tbody></table>\n";
 		if( $echo ) {
 			echo $out;
@@ -173,9 +171,9 @@ class SimpleCalendar {
 		if( $steps < 0 ) {
 			$steps = $count + $steps;
 		}
-		$steps = $steps % $count;
+		$steps %= $count;
 		for( $i = 0; $i < $steps; $i++ ) {
-			array_push($data, array_shift($data));
+			$data[] = array_shift($data);
 		}
 	}
 }

@@ -1,5 +1,5 @@
 {
-	"name"       : "donatj/simplecalendar",
+	"name"       : "openWebX/simplecalendar",
 	"type"       : "library",
 	"description": "A light, easy to use calendar rendering library",
 	"keywords"   : ["calendar"],
@@ -18,11 +18,17 @@
 			"email"   : "donatj@gmail.com",
 			"homepage": "http://donatstudios.com",
 			"role"    : "Developer"
+		},
+		{
+			"name"    : "Jens Reinemuth",
+			"email"   : "jens@reinemuth.rocks",
+			"homepage": "http://reinemuth.rocks",
+			"role"    : "Developer"
 		}
 	],
 	"autoload"   : {
 		"psr-0": {
-			"donatj": "lib/"
+			"openWebX": "lib/"
 		}
 	}
 }
