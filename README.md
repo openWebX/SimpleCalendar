@@ -11,7 +11,7 @@ A very simple, easy to use PHP calendar rendering class.
 
 ## Requirements
 
-- **php**: >=5.3.0
+- **php**: >=7.0.0
 - **ext-calendar**: *
 
 ## Installing
@@ -19,7 +19,7 @@ A very simple, easy to use PHP calendar rendering class.
 Install the latest version with:
 
 ```bash
-composer require 'donatj/simplecalendar'
+composer require 'openWebX/simplecalendar'
 ```
 
 ## Sample Usage
@@ -27,9 +27,7 @@ composer require 'donatj/simplecalendar'
 					
 ```php
 <?php
-require('SimpleCalendar.php');
-
-$Calendar = new donatj\SimpleCalendar('June 2010');
+$Calendar = new SimpleCalendar\Calendar('June 2010');
 $Calendar->show();
 ```
 
@@ -37,9 +35,7 @@ or
 
 ```php
 <?php
-require('SimpleCalendar.php');
-
-$Calendar = new donatj\SimpleCalendar();
+$Calendar = new ew SimpleCalendar\Calendar();
 $Calendar->setDate('June 5 2010');
 $Calendar->show();
 ```
