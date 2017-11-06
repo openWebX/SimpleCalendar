@@ -1,6 +1,6 @@
 <?php
 
-namespace openWebX;
+namespace SimpleCalendar;
 
 /**
  * Simple Calendar
