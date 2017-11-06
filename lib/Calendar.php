@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleCalendar;
+namespace openWebX\SimpleCalendar;
 
 /**
  * Simple Calendar
@@ -10,7 +10,7 @@ namespace SimpleCalendar;
  * @license http://opensource.org/licenses/mit-license.php
  *
  */
-class SimpleCalendar {
+class Calendar {
 
 	/**
 	 * Array of Week Day Names
